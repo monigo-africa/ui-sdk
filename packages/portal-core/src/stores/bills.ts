@@ -1,26 +1,26 @@
 import { BaseStore } from './store'
 import type { PortalClient } from '../client'
-import type { PortalInvoice } from '../types'
+import type { Bill } from '../types'
 
-export type InvoicesState =
+export type BillsState =
   | { status: 'idle' }
-  | { status: 'loading'; invoices?: PortalInvoice[] }
-  | { status: 'ready'; invoices: PortalInvoice[]; count: number; page: number; limit: number; fetchedAt: number }
-  | { status: 'error'; error: Error; invoices?: PortalInvoice[] }
+  | { status: 'loading'; bills?: Bill[] }
+  | { status: 'ready'; bills: Bill[]; count: number; page: number; limit: number; fetchedAt: number }
+  | { status: 'error'; error: Error; bills?: Bill[] }
 
-export type InvoicesAction =
+export type BillsAction =
   | { type: 'load'; page?: number; limit?: number }
   | { type: 'refresh' }
   | { type: 'reset' }
 
-export class InvoicesStore extends BaseStore<InvoicesState, InvoicesAction> {
+export class BillsStore extends BaseStore<BillsState, BillsAction> {
   private lastParams: { page: number; limit: number } = { page: 1, limit: 20 }
 
   constructor(private readonly client: PortalClient) {
     super({ status: 'idle' })
   }
 
-  protected async reduce(state: InvoicesState, action: InvoicesAction): Promise<InvoicesState> {
+  protected async reduce(state: BillsState, action: BillsAction): Promise<BillsState> {
     switch (action.type) {
       case 'reset':
         return { status: 'idle' }
@@ -34,17 +34,17 @@ export class InvoicesStore extends BaseStore<InvoicesState, InvoicesAction> {
         this.lastParams = params
 
         // Synchronously emit loading so UI can render a skeleton while we fetch.
-        const prevInvoices = 'invoices' in state && state.invoices ? state.invoices : undefined
+        const prevBills = 'bills' in state && state.bills ? state.bills : undefined
         this.setState({
           status: 'loading',
-          ...(prevInvoices !== undefined && { invoices: prevInvoices }),
+          ...(prevBills !== undefined && { bills: prevBills }),
         })
 
         try {
-          const res = await this.client.getInvoices(params.page, params.limit)
+          const res = await this.client.getBills(params.page, params.limit)
           return {
             status: 'ready',
-            invoices: res.invoices,
+            bills: res.bills,
             count: res.count,
             page: params.page,
             limit: params.limit,
@@ -55,7 +55,7 @@ export class InvoicesStore extends BaseStore<InvoicesState, InvoicesAction> {
           return {
             status: 'error',
             error,
-            ...(prevInvoices !== undefined && { invoices: prevInvoices }),
+            ...(prevBills !== undefined && { bills: prevBills }),
           }
         }
       }
