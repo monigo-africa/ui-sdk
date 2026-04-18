@@ -56,7 +56,7 @@ export function InvoiceDetail({ invoiceId, className = '' }: InvoiceDetailProps)
         </div>
       </header>
 
-      {(invoice.status === 'finalized' || invoice.status === 'payment_failed') && (
+      {(invoice.status === 'finalized' || (invoice.status as string) === 'payment_failed') && (
         <div style={{ padding: 'var(--monigo-space-4) 0' }}>
           <PayInvoiceButton invoiceId={invoice.id} />
         </div>
