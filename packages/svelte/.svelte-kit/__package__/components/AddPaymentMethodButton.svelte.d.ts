@@ -1,5 +1,8 @@
 interface Props {
-    onadd: () => void;
+    onadd?: () => void;
+    onunsupported?: () => void;
+    onError?: (err: unknown) => void;
+    onBefore?: () => boolean | Promise<boolean>;
     label?: string;
     class?: string;
 }

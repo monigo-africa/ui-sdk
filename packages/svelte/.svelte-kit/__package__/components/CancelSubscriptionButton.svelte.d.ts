@@ -1,7 +1,8 @@
 import type { PortalSubscription } from '@monigo/portal-core';
 interface Props {
     subscription: PortalSubscription;
-    oncancel: (sub: PortalSubscription) => void;
+    oncancel?: (sub: PortalSubscription) => void;
+    onError?: (err: unknown) => void;
     label?: string;
     class?: string;
 }

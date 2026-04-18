@@ -1,5 +1,11 @@
 # @monigo/portal-core
 
+## 0.3.0
+
+### Minor Changes
+
+- 8ee700f: Add cancelSubscription() and setupPaymentMethod() to PortalClient; add generated api-types.ts from OpenAPI spec; wire cancelSubscription and setupPaymentMethod into CancelSubscriptionButton and AddPaymentMethodButton svelte action components.
+
 ## 0.2.0
 
 ### Patch Changes

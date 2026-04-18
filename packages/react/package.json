@@ -1,6 +1,6 @@
 {
   "name": "@monigo/react",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "description": "React 18+ customer-portal building blocks and composed portal for Monigo.",
   "license": "MIT",
   "type": "module",
@@ -14,7 +14,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run",

@@ -1,6 +1,6 @@
 {
   "name": "@monigo/portal-core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Framework-agnostic core for Monigo customer-portal UI: typed API client, per-feature state stores, formatters, and message catalog.",
   "license": "MIT",
   "type": "module",
