@@ -48,6 +48,7 @@ export const en = {
   'payment_methods.action.add': 'Add payment method',
   'payment_methods.action.remove': 'Remove',
   'payment_methods.action.default': 'Make default',
+  'payment_methods.setup.unsupported': 'Adding payment methods is not supported for your account.',
 
   // Payout accounts
   'payout_accounts.title': 'Payout Accounts',
