@@ -9,15 +9,31 @@ interface Props {
   class?: string
 }
 const props = withDefaults(defineProps<Props>(), { class: '' })
-const emit = defineEmits<{ cancel: [sub: PortalSubscription] }>()
+const emit = defineEmits<{
+  cancel: [sub: PortalSubscription]
+  error: [err: unknown]
+}>()
 
-const { messages } = useMonigoContext()
-const confirming = ref(false)
+const { client, messages } = useMonigoContext()
+const loading = ref(false)
+const errorMessage = ref<string | null>(null)
 
-const handleClick = () => {
-  if (!confirming.value) { confirming.value = true; return }
-  confirming.value = false
-  emit('cancel', props.subscription)
+async function handleClick(): Promise<void> {
+  if (typeof window === 'undefined') return
+  const confirmed = window.confirm(messages['subscriptions.cancel.confirm'])
+  if (!confirmed) return
+
+  loading.value = true
+  errorMessage.value = null
+  try {
+    await client.cancelSubscription(props.subscription.id)
+    emit('cancel', props.subscription)
+  } catch (err) {
+    errorMessage.value = err instanceof Error ? err.message : String(err)
+    emit('error', err)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
@@ -25,17 +41,27 @@ const handleClick = () => {
   <button
     type="button"
     :class="['monigo-cancel-sub-btn', props.class]"
+    :disabled="loading"
+    :aria-busy="loading"
     :style="{
       padding: 'var(--monigo-space-2) var(--monigo-space-4)',
-      background: confirming ? 'var(--monigo-color-danger)' : 'transparent',
-      color: confirming ? 'var(--monigo-color-danger-fg)' : 'var(--monigo-color-danger)',
+      background: 'transparent',
+      color: 'var(--monigo-color-danger)',
       border: '1px solid var(--monigo-color-danger)',
       borderRadius: 'var(--monigo-radius-md)',
       fontSize: 'var(--monigo-text-sm)',
-      cursor: 'pointer',
+      cursor: loading ? 'not-allowed' : 'pointer',
+      opacity: loading ? 0.6 : 1,
     }"
     @click="handleClick"
   >
-    {{ confirming ? messages['subscriptions.cancel.confirm'] : (props.label ?? messages['subscriptions.action.cancel']) }}
+    {{ loading ? messages['common.loading'] : (props.label ?? messages['subscriptions.action.cancel']) }}
   </button>
+  <p
+    v-if="errorMessage"
+    role="alert"
+    :style="{ color: 'var(--monigo-color-danger)', fontSize: 'var(--monigo-text-sm)', marginTop: 'var(--monigo-space-1)' }"
+  >
+    {{ errorMessage }}
+  </p>
 </template>
