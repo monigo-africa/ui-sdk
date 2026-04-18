@@ -1,1 +1,0 @@
-{"version":3,"file":"invoices.svelte.d.ts","sourceRoot":"","sources":["../../src/stores/invoices.svelte.ts"],"names":[],"mappings":"AAAA,OAAO,EAAiB,KAAK,aAAa,EAAE,KAAK,cAAc,EAAE,KAAK,YAAY,EAAE,MAAM,qBAAqB,CAAA;AAC/G,OAAO,EAAE,SAAS,EAAE,MAAM,oBAAoB,CAAA;AAE9C,MAAM,MAAM,YAAY,GAAG,SAAS,CAAC,aAAa,EAAE,cAAc,CAAC,CAAA;AAEnE,wBAAgB,kBAAkB,CAAC,MAAM,EAAE,YAAY,GAAG,YAAY,CAErE"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"InvoiceStatusBadge.svelte.d.ts","sourceRoot":"","sources":["../../src/components/InvoiceStatusBadge.svelte.ts"],"names":[],"mappings":"AAME,UAAU,KAAK;IACb,MAAM,EAAE,MAAM,CAAA;IACd,KAAK,CAAC,EAAE,MAAM,CAAA;CACf;AAoBH,QAAA,MAAM,kBAAkB,2CAAwC,CAAC;AACjE,KAAK,kBAAkB,GAAG,UAAU,CAAC,OAAO,kBAAkB,CAAC,CAAC;AAChE,eAAe,kBAAkB,CAAC"}
