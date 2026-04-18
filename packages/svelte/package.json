@@ -1,6 +1,6 @@
 {
   "name": "@monigo/svelte",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "Svelte 5 customer-portal building blocks and composed portal for Monigo.",
   "license": "MIT",
   "type": "module",
@@ -14,7 +14,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "svelte-package -i src -o dist",
     "test": "vitest run",

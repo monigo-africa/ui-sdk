@@ -1,0 +1,1 @@
+{"version":3,"file":"WalletTransactionList.svelte.d.ts","sourceRoot":"","sources":["../../src/components/WalletTransactionList.svelte.ts"],"names":[],"mappings":"AAWE,UAAU,KAAK;IAAG,QAAQ,EAAE,MAAM,CAAC;IAAC,KAAK,CAAC,EAAE,MAAM,CAAC;IAAC,KAAK,CAAC,EAAE,MAAM,CAAA;CAAE;AA0EtE,QAAA,MAAM,qBAAqB,2CAAwC,CAAC;AACpE,KAAK,qBAAqB,GAAG,UAAU,CAAC,OAAO,qBAAqB,CAAC,CAAC;AACtE,eAAe,qBAAqB,CAAC"}

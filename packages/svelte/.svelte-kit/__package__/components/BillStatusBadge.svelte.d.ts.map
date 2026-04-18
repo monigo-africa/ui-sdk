@@ -1,0 +1,1 @@
+{"version":3,"file":"BillStatusBadge.svelte.d.ts","sourceRoot":"","sources":["../../src/components/BillStatusBadge.svelte.ts"],"names":[],"mappings":"AAME,UAAU,KAAK;IACb,MAAM,EAAE,MAAM,CAAA;IACd,KAAK,CAAC,EAAE,MAAM,CAAA;CACf;AAoBH,QAAA,MAAM,eAAe,2CAAwC,CAAC;AAC9D,KAAK,eAAe,GAAG,UAAU,CAAC,OAAO,eAAe,CAAC,CAAC;AAC1D,eAAe,eAAe,CAAC"}
