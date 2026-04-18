@@ -23,14 +23,15 @@
     "test:watch": "vitest",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
-    "codegen": "openapi-typescript ../../../../platform/docs/openapi.yaml -o src/generated/api-types.ts",
-    "codegen:check": "openapi-typescript ../../../../platform/docs/openapi.yaml -o /tmp/api-types-check.ts && diff src/generated/api-types.ts /tmp/api-types-check.ts"
+    "codegen": "swagger2openapi ${OPENAPI_SPEC:-../../../../platform/docs/openapi.yaml} -o /tmp/openapi3-portal-core.yaml && openapi-typescript /tmp/openapi3-portal-core.yaml -o src/generated/api-types.ts",
+    "codegen:check": "swagger2openapi ${OPENAPI_SPEC:-../../../../platform/docs/openapi.yaml} -o /tmp/openapi3-check.yaml && openapi-typescript /tmp/openapi3-check.yaml -o /tmp/api-types-check.ts && diff src/generated/api-types.ts /tmp/api-types-check.ts"
   },
   "dependencies": {
     "@monigo/sdk": "^0.1.8"
   },
   "devDependencies": {
     "openapi-typescript": "7",
+    "swagger2openapi": "^7.0.8",
     "tsup": "^8.3.0",
     "typescript": "^5.6.3",
     "vitest": "^2.1.3"
