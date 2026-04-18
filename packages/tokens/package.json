@@ -1,6 +1,6 @@
 {
   "name": "@monigo/tokens",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Design tokens and theming helpers for Monigo UI packages.",
   "license": "MIT",
   "type": "module",
@@ -16,7 +16,11 @@
     "./monigo.css": "./monigo.css",
     "./monigo-dark.css": "./monigo-dark.css"
   },
-  "files": ["dist", "monigo.css", "monigo-dark.css"],
+  "files": [
+    "dist",
+    "monigo.css",
+    "monigo-dark.css"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
