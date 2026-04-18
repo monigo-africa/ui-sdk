@@ -1,0 +1,32 @@
+{
+  "name": "@monigo/tokens",
+  "version": "0.0.0",
+  "description": "Design tokens and theming helpers for Monigo UI packages.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./monigo.css": "./monigo.css",
+    "./monigo-dark.css": "./monigo-dark.css"
+  },
+  "files": ["dist", "monigo.css", "monigo-dark.css"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}
