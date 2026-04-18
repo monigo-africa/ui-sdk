@@ -1,0 +1,52 @@
+/*
+ * @monigo/tokens — base tokens
+ *
+ * Consume this file once in your app to get Monigo's default theme.
+ * Override any variable on an ancestor to retheme. Set
+ * data-monigo-theme="dark" on any ancestor to switch to dark mode
+ * (see monigo-dark.css).
+ */
+
+:root {
+  /* Colors */
+  --monigo-color-primary: #4f46e5;
+  --monigo-color-primary-fg: #ffffff;
+  --monigo-color-accent: #ec4899;
+  --monigo-color-accent-fg: #ffffff;
+  --monigo-color-bg: #ffffff;
+  --monigo-color-fg: #0f172a;
+  --monigo-color-muted: #f1f5f9;
+  --monigo-color-muted-fg: #64748b;
+  --monigo-color-border: #e2e8f0;
+  --monigo-color-danger: #dc2626;
+  --monigo-color-danger-fg: #ffffff;
+  --monigo-color-success: #16a34a;
+  --monigo-color-success-fg: #ffffff;
+  --monigo-color-warning: #d97706;
+  --monigo-color-warning-fg: #ffffff;
+
+  /* Radii */
+  --monigo-radius-sm: 4px;
+  --monigo-radius-md: 8px;
+  --monigo-radius-lg: 12px;
+
+  /* Spacing (4px grid) */
+  --monigo-space-1: 4px;
+  --monigo-space-2: 8px;
+  --monigo-space-3: 12px;
+  --monigo-space-4: 16px;
+  --monigo-space-5: 20px;
+  --monigo-space-6: 24px;
+  --monigo-space-7: 32px;
+  --monigo-space-8: 40px;
+
+  /* Typography */
+  --monigo-font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --monigo-font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --monigo-text-xs: 12px;
+  --monigo-text-sm: 14px;
+  --monigo-text-md: 16px;
+  --monigo-text-lg: 18px;
+  --monigo-text-xl: 20px;
+  --monigo-text-2xl: 24px;
+}
