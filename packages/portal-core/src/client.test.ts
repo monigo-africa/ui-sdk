@@ -52,4 +52,40 @@ describe('PortalClient', () => {
     const [url] = fetch.mock.calls[0]!
     expect(url).toMatch(/^https:\/\/api\.monigo\.co\/api\/v1\//)
   })
+
+  it('cancelSubscription posts to the correct URL', async () => {
+    const fetch = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ message: 'subscription canceled' }) })
+    const client = new PortalClient({ portalToken: 'tok', fetch })
+    const result = await client.cancelSubscription('sub-123')
+    expect(result).toEqual({ message: 'subscription canceled' })
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('/portal/subscriptions/sub-123/cancel'),
+      expect.objectContaining({ method: 'POST' })
+    )
+  })
+
+  it('setupPaymentMethod posts to the correct URL and returns authorization_url', async () => {
+    const fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ message: 'Payment method setup initiated', authorization_url: 'https://checkout.paystack.com/xxx', reference: 'card-setup-abc', provider: 'paystack' })
+    })
+    const client = new PortalClient({ portalToken: 'tok', fetch })
+    const result = await client.setupPaymentMethod()
+    expect(result.authorization_url).toBe('https://checkout.paystack.com/xxx')
+    expect(result.provider).toBe('paystack')
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('/portal/payment-methods/setup'),
+      expect.objectContaining({ method: 'POST' })
+    )
+  })
+
+  it('setupPaymentMethod propagates 501 as PortalApiError', async () => {
+    const fetch = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 501,
+      json: () => Promise.resolve({ error: 'payment method setup not supported for this provider' })
+    })
+    const client = new PortalClient({ portalToken: 'tok', fetch })
+    await expect(client.setupPaymentMethod()).rejects.toThrow(PortalApiError)
+  })
 })
