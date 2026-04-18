@@ -13,7 +13,7 @@ export function PortalInvoicesPage({ onInvoiceClick, className = '' }: PortalInv
   return (
     <section className={`monigo-page ${className}`}>
       <h1 style={{ fontSize: 'var(--monigo-text-2xl)', marginBottom: 'var(--monigo-space-5)' }}>{messages['invoices.title']}</h1>
-      <InvoiceList onInvoiceClick={onInvoiceClick} />
+      <InvoiceList {...(onInvoiceClick !== undefined && { onInvoiceClick })} />
     </section>
   )
 }

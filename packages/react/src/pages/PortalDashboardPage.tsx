@@ -13,7 +13,7 @@ export function PortalDashboardPage({ onInvoiceClick, onBillClick, className = '
   return (
     <section className={`monigo-page ${className}`}>
       <DashboardSummary />
-      <RecentActivity onInvoiceClick={onInvoiceClick} onBillClick={onBillClick} />
+      <RecentActivity {...(onInvoiceClick !== undefined && { onInvoiceClick })} {...(onBillClick !== undefined && { onBillClick })} />
     </section>
   )
 }
