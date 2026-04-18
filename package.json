@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "turbo run build",
+    "codegen": "turbo run codegen",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "lint": "turbo run lint",
