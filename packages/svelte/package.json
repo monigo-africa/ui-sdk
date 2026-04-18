@@ -16,7 +16,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "svelte-package -o dist && tsc --emitDeclarationOnly --outDir dist --noCheck",
+    "build": "svelte-package -i src -o dist",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src",
