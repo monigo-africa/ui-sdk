@@ -1,4 +1,4 @@
-import { ref, onUnmounted, readonly, type Ref } from 'vue'
+import { ref, onUnmounted, type Ref } from 'vue'
 import type { Store } from '@monigo/portal-core'
 
 export interface UseStoreResult<S, A> {
@@ -17,7 +17,7 @@ export function useStore<S, A>(store: Store<S, A>): UseStoreResult<S, A> {
   onUnmounted(unsubscribe)
 
   return {
-    state: readonly(state),
+    state: state as unknown as Readonly<Ref<S>>,
     dispatch: (action: A) => store.dispatch(action),
     dispose: unsubscribe,
   }
