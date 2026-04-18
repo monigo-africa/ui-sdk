@@ -1,0 +1,22 @@
+/*
+ * @monigo/tokens — dark overrides
+ *
+ * Import this file alongside monigo.css. Apply by setting
+ * data-monigo-theme="dark" on any ancestor (MonigoProvider does this
+ * automatically when mode === 'dark' or 'auto' with prefers-color-scheme).
+ */
+
+[data-monigo-theme='dark'] {
+  --monigo-color-bg: #0b1220;
+  --monigo-color-fg: #f1f5f9;
+  --monigo-color-muted: #1e293b;
+  --monigo-color-muted-fg: #94a3b8;
+  --monigo-color-border: #334155;
+  --monigo-color-primary: #818cf8;
+  --monigo-color-primary-fg: #0b1220;
+  --monigo-color-accent: #f472b6;
+  --monigo-color-accent-fg: #0b1220;
+  --monigo-color-danger: #f87171;
+  --monigo-color-success: #4ade80;
+  --monigo-color-warning: #fbbf24;
+}
