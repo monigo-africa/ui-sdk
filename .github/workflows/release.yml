@@ -1,0 +1,94 @@
+# Release workflow for the @monigo/* npm packages.
+#
+# Flow (Changesets pattern):
+#   1. Contributors add `.changeset/*.md` files in their PRs documenting the
+#      intended version bump ("minor" / "patch" / "major").
+#   2. On every push to main, this workflow runs changesets/action:
+#        - If unconsumed changesets exist, it opens/updates a PR titled
+#          "Version Packages" that bumps versions and deletes the changeset
+#          files.
+#        - When that PR is merged back to main, this workflow runs again
+#          and calls `pnpm exec changeset publish`, which publishes every
+#          package whose package.json version isn't yet on the npm registry.
+#
+# Provenance:
+#   We publish with `--provenance` (via `pnpm exec changeset publish`) using
+#   the GitHub OIDC token — no long-lived NPM_TOKEN needed if the packages
+#   are configured for OIDC-trusted publishers on npm. The NPM_TOKEN secret
+#   is still supported as a fallback for packages that don't have a trusted
+#   publisher set up yet.
+
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write     # push version-bump commits and tags
+  pull-requests: write # open/update the "Version Packages" PR
+  id-token: write     # required for npm provenance via OIDC
+
+jobs:
+  release:
+    name: Release @monigo/*
+    runs-on: ubuntu-latest
+    # Only run on the ui/ monorepo changes. Adjust the paths filter if
+    # you're running this in a multi-project repo.
+    if: github.repository_owner != ''
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Changesets needs the full history to compute the changelog.
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify build is green before releasing
+        run: |
+          pnpm typecheck
+          pnpm lint
+          pnpm test
+          pnpm build
+
+      - name: Create release PR or publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Runs `changeset version` to open/update the release PR.
+          version: pnpm exec changeset version
+          # Runs when the release PR is merged: publishes each package that
+          # has a new version on main but isn't yet on npm.
+          publish: pnpm exec changeset publish --provenance
+          commit: "chore: release @monigo/*"
+          title: "chore: release @monigo/*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Summarize
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "### Published packages" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          echo '${{ steps.changesets.outputs.publishedPackages }}' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
