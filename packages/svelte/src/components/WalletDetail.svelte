@@ -45,7 +45,7 @@
       <p class="balance">{formatCurrency(viewState.wallet.balance, viewState.wallet.currency, locale)}</p>
     </header>
 
-    {#if viewState.wallet.virtual_accounts.length > 0}
+    {#if viewState.wallet.virtual_accounts && viewState.wallet.virtual_accounts.length > 0}
       <section class="vas">
         <h3>Virtual accounts</h3>
         <ul>

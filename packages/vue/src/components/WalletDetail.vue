@@ -55,7 +55,7 @@ onMounted(load)
       </p>
     </header>
 
-    <section v-if="wallet.virtual_accounts.length > 0" :style="{ padding: 'var(--monigo-space-5) 0' }">
+    <section v-if="wallet.virtual_accounts && wallet.virtual_accounts.length > 0" :style="{ padding: 'var(--monigo-space-5) 0' }">
       <h3 :style="{ margin: '0 0 var(--monigo-space-3)', fontSize: 'var(--monigo-text-md)' }">Virtual accounts</h3>
       <ul :style="{ listStyle: 'none', margin: '0', padding: '0' }">
         <li

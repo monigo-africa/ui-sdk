@@ -17,7 +17,7 @@
     <span class="status">{wallet.status}</span>
   </div>
   <p class="balance">{formatCurrency(wallet.balance, wallet.currency, locale)}</p>
-  {#if wallet.virtual_accounts.length > 0}
+  {#if wallet.virtual_accounts && wallet.virtual_accounts.length > 0}
     <p class="va">{wallet.virtual_accounts.length} virtual account{wallet.virtual_accounts.length === 1 ? '' : 's'}</p>
   {/if}
 {/snippet}

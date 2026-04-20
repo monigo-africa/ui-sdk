@@ -47,7 +47,7 @@ export function WalletDetail({ walletId, className = '' }: WalletDetailProps): R
         <p style={{ fontSize: 'var(--monigo-text-2xl)', fontWeight: 700, margin: '0 0 var(--monigo-space-3)' }}>
           {formatCurrency(wallet.balance, wallet.currency, locale)}
         </p>
-        {wallet.virtual_accounts.length > 0 && (
+        {wallet.virtual_accounts && wallet.virtual_accounts.length > 0 && (
           <div>
             <p style={{ fontSize: 'var(--monigo-text-sm)', fontWeight: 500, margin: '0 0 var(--monigo-space-2)' }}>Bank accounts</p>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>

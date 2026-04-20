@@ -1,6 +1,6 @@
 {
   "name": "@monigo/vue",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Vue 3.4+ customer-portal building blocks and composed portal for Monigo.",
   "license": "MIT",
   "type": "module",

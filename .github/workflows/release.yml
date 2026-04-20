@@ -12,11 +12,13 @@
 #          package whose package.json version isn't yet on the npm registry.
 #
 # Provenance:
-#   We publish with `--provenance` (via `pnpm exec changeset publish`) using
-#   the GitHub OIDC token — no long-lived NPM_TOKEN needed if the packages
-#   are configured for OIDC-trusted publishers on npm. The NPM_TOKEN secret
-#   is still supported as a fallback for packages that don't have a trusted
-#   publisher set up yet.
+#   We publish with provenance using the GitHub OIDC token — no long-lived
+#   NPM_TOKEN needed if the packages are configured for OIDC-trusted
+#   publishers on npm. The NPM_TOKEN secret is still supported as a fallback
+#   for packages that don't have a trusted publisher set up yet.
+#   Provenance is enabled via the NPM_CONFIG_PROVENANCE env var (changesets
+#   invokes `npm publish` under the hood; the changeset CLI itself doesn't
+#   accept a --provenance flag).
 
 name: Release
 
@@ -77,12 +79,13 @@ jobs:
           version: pnpm exec changeset version
           # Runs when the release PR is merged: publishes each package that
           # has a new version on main but isn't yet on npm.
-          publish: pnpm exec changeset publish --provenance
+          publish: pnpm exec changeset publish
           commit: "chore: release @monigo/*"
           title: "chore: release @monigo/*"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"
 
       - name: Summarize
         if: steps.changesets.outputs.published == 'true'
