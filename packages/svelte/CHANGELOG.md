@@ -1,5 +1,23 @@
 # @monigo/svelte
 
+## 0.3.1
+
+### Patch Changes
+
+- Fix customer portal failing to mount with `no MonigoProvider ancestor found`.
+
+  `MonigoProvider` was calling `setMonigoContext` inside `$effect`, but Svelte
+  runs children's `<script>` blocks after the parent's script and before the
+  parent's effects. Any child reading `getMonigoContext()` during init (e.g.
+  `DashboardSummary`, `PortalDashboardPage`) therefore threw on first render.
+
+  The provider now sets context synchronously during script init, with getter-
+  backed fields so child reads stay reactive against the underlying `$derived`
+  values. `MonigoContext`'s optional callbacks accept explicit `undefined` to
+  satisfy `exactOptionalPropertyTypes` with the new getter-based shape.
+  - @monigo/portal-core@0.3.1
+  - @monigo/tokens@0.3.1
+
 ## 0.3.0
 
 ### Patch Changes

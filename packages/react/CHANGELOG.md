@@ -1,5 +1,12 @@
 # @monigo/react
 
+## 0.3.1
+
+### Patch Changes
+
+- @monigo/portal-core@0.3.1
+- @monigo/tokens@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes

@@ -16,8 +16,8 @@ export interface MonigoContext {
   messages: MessageCatalog
   locale: string
   theme: MonigoTheme
-  onUnauthorized?: () => void
-  onError?: (err: unknown) => void
+  onUnauthorized?: (() => void) | undefined
+  onError?: ((err: unknown) => void) | undefined
 }
 
 export interface MonigoContextInit {

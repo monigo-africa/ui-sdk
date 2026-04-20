@@ -44,15 +44,18 @@
 
   const messages = $derived(createMessages(locale, messageOverrides))
 
-  $effect(() => {
-    setMonigoContext({
-      client,
-      messages,
-      locale,
-      theme,
-      ...(onUnauthorized !== undefined && { onUnauthorized }),
-      ...(onError !== undefined && { onError }),
-    })
+  // Context MUST be set during component initialization (synchronously in <script>).
+  // Svelte initializes children's scripts after this parent's script but BEFORE
+  // $effect runs, so setting context inside $effect leaves children throwing
+  // "no MonigoProvider ancestor found" on their first getMonigoContext() read.
+  // Getters forward live $derived/$props values so child reads stay reactive.
+  setMonigoContext({
+    get client() { return client },
+    get messages() { return messages },
+    get locale() { return locale },
+    get theme() { return theme },
+    get onUnauthorized() { return onUnauthorized },
+    get onError() { return onError },
   })
 
   const themeCSS = $derived(createTheme({
