@@ -47,6 +47,7 @@ export { default as WalletCard } from './components/WalletCard.svelte'
 export { default as WalletDetail } from './components/WalletDetail.svelte'
 export { default as WalletTransactionList } from './components/WalletTransactionList.svelte'
 export { default as FundWalletButton } from './components/FundWalletButton.svelte'
+export { default as WalletWidget } from './components/WalletWidget.svelte'
 
 // Payment methods
 export { default as PaymentMethodList } from './components/PaymentMethodList.svelte'
