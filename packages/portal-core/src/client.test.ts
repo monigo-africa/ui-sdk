@@ -89,3 +89,38 @@ describe('PortalClient', () => {
     await expect(client.setupPaymentMethod()).rejects.toThrow(PortalApiError)
   })
 })
+
+describe('initWalletFunding', () => {
+  it('POSTs inline:true and returns the funding session', async () => {
+    const fetchMock = vi.fn(async (_url: string, init?: RequestInit) => {
+      const body = JSON.parse(String(init?.body))
+      expect(body).toEqual({ amount: '5000.00', currency: 'NGN', inline: true })
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({
+          provider: 'paystack',
+          reference: 'wf_abc_1',
+          amount: '5000.00',
+          currency: 'NGN',
+          email: 'c@example.com',
+          customer_name: 'Jane',
+          public_key: 'pk_test_x',
+          access_code: 'ac_1',
+          meta: { purpose: 'wallet_funding' },
+        }),
+      } as unknown as Response
+    })
+    const client = new PortalClient({ portalToken: 't', fetch: fetchMock as unknown as typeof fetch })
+
+    const session = await client.initWalletFunding('wal_1', { amount: '5000.00', currency: 'NGN' })
+
+    expect(session.provider).toBe('paystack')
+    expect(session.public_key).toBe('pk_test_x')
+    expect(session.access_code).toBe('ac_1')
+    expect(fetchMock).toHaveBeenCalledWith(
+      expect.stringContaining('/portal/wallets/wal_1/fund'),
+      expect.objectContaining({ method: 'POST' }),
+    )
+  })
+})

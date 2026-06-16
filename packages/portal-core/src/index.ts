@@ -65,3 +65,10 @@ export type { PayoutAccountsState, PayoutAccountsAction } from './stores/payout-
 
 export { DashboardStore } from './stores/dashboard'
 export type { DashboardState, DashboardAction, DashboardSnapshot } from './stores/dashboard'
+
+// Wallet funding — inline checkout + live balance
+export type { FundingSession, FundingProvider } from './types'
+export { launchCheckout } from './checkout'
+export type { CheckoutResult, LaunchOptions, CheckoutAdapter } from './checkout'
+export { createBalancePoller } from './polling'
+export type { BalancePoller, BalancePollerOptions } from './polling'
