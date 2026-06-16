@@ -139,6 +139,27 @@ export type CustomerPayoutAccount = PayoutAccount & {
   customer_id: string
 }
 
+// ── Wallet funding session ─────────────────────────────────────────────────
+
+export type FundingProvider = 'paystack' | 'stripe' | 'flutterwave' | 'monnify'
+
+/** Provider-agnostic inline-checkout session returned by initWalletFunding.
+ *  Mirrors the backend domain.WalletFundingSession. Only PUBLIC credentials. */
+export interface FundingSession {
+  provider: FundingProvider
+  reference: string
+  amount: string
+  currency: string
+  email?: string         // backend omitempty
+  customer_name?: string // backend omitempty
+  public_key: string
+  access_code?: string   // paystack
+  client_secret?: string // stripe
+  contract_code?: string // monnify
+  meta: Record<string, unknown>
+  authorization_url?: string // redirect fallback
+}
+
 // ── Re-exports for consumer convenience ───────────────────────────────────
 
 export type { Invoice, Subscription, PayoutAccount } from '@monigo/sdk'

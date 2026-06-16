@@ -12,6 +12,7 @@ import type {
   PortalSubscription,
   PortalWallet,
   PortalWalletTransactionsResponse,
+  FundingSession,
 } from './types'
 
 const DEFAULT_BASE_URL = 'https://api.monigo.co/api/v1'
@@ -121,6 +122,9 @@ export class PortalClient {
   }
   fundWallet(id: string, body: { amount: string; currency: string }): Promise<{ message: string; authorization_url: string; reference: string; provider: string }> {
     return this.request('POST', `/portal/wallets/${id}/fund`, body)
+  }
+  initWalletFunding(id: string, body: { amount: string; currency: string }): Promise<FundingSession> {
+    return this.request('POST', `/portal/wallets/${id}/fund`, { ...body, inline: true })
   }
 
   // ── Payment methods ───────────────────────────────────────────────────
