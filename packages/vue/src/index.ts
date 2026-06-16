@@ -48,6 +48,7 @@ export { default as WalletCard } from './components/WalletCard.vue'
 export { default as WalletDetail } from './components/WalletDetail.vue'
 export { default as WalletTransactionList } from './components/WalletTransactionList.vue'
 export { default as FundWalletButton } from './components/FundWalletButton.vue'
+export { default as WalletWidget } from './components/WalletWidget.vue'
 
 // Payment methods
 export { default as PaymentMethodList } from './components/PaymentMethodList.vue'
