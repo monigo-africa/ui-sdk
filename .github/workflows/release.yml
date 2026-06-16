@@ -30,6 +30,9 @@ concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 permissions:
   contents: write     # push version-bump commits and tags
   pull-requests: write # open/update the "Version Packages" PR
