@@ -58,6 +58,8 @@ export { WalletCard } from './components/WalletCard'
 export { WalletDetail } from './components/WalletDetail'
 export { WalletTransactionList } from './components/WalletTransactionList'
 export { FundWalletButton } from './components/FundWalletButton'
+export { WalletWidget } from './components/WalletWidget'
+export type { WalletWidgetProps } from './components/WalletWidget'
 
 // Payment methods
 export { PaymentMethodList } from './components/PaymentMethodList'
