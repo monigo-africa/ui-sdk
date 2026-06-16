@@ -7,6 +7,7 @@ const SCRIPT = 'https://js.stripe.com/v3'
 export const stripeAdapter: CheckoutAdapter = {
   async launch(session, opts): Promise<CheckoutResult> {
     if (!opts.mountEl) throw new Error('Stripe embedded checkout requires a mount element')
+    if (!session.public_key) throw new Error('Stripe session missing public_key')
     if (!session.client_secret) throw new Error('Stripe session missing client_secret')
     await loadScript(SCRIPT)
     const Stripe = (globalThis as Record<string, unknown>).Stripe as
