@@ -135,7 +135,7 @@ export function WalletWidget({
               </button>
             ))}
           </div>
-          <input type="number" step="0.01" min="0" value={amount} aria-label="Amount"
+          <input type="number" step="0.01" min="0" required value={amount} aria-label="Amount"
             onChange={(e) => setAmount(e.target.value)} placeholder={`Amount (${currency})`} disabled={view === 'funding'}
             style={{ padding: 'var(--monigo-space-2)', border: '1px solid var(--monigo-color-border)', borderRadius: 'var(--monigo-radius-sm)', fontSize: 'var(--monigo-text-sm)' }} />
           <div style={{ display: 'flex', gap: 'var(--monigo-space-2)' }}>

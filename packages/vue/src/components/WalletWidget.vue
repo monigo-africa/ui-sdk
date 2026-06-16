@@ -31,7 +31,6 @@ let abortController: AbortController | undefined
 
 function startPoller() {
   poller?.stop()
-  view.value = 'loading'
   poller = createBalancePoller(client, props.walletId, {
     intervalMs: props.pollIntervalMs,
     onBalance: (b, w) => { balance.value = b; status.value = (w as PortalWallet).status; if (view.value === 'loading') view.value = 'ready' },
@@ -113,7 +112,7 @@ function cancelFunding() {
           {{ formatCurrency(String(p), props.currency, locale) }}
         </button>
       </div>
-      <input v-model="amount" type="number" step="0.01" min="0" aria-label="Amount" :placeholder="`Amount (${props.currency})`" :disabled="view === 'funding'"
+      <input v-model="amount" type="number" step="0.01" min="0" required aria-label="Amount" :placeholder="`Amount (${props.currency})`" :disabled="view === 'funding'"
         :style="{ padding: 'var(--monigo-space-2)', border: '1px solid var(--monigo-color-border)', borderRadius: 'var(--monigo-radius-sm)', fontSize: 'var(--monigo-text-sm)' }" />
       <div :style="{ display: 'flex', gap: 'var(--monigo-space-2)' }">
         <button type="submit" class="primary" :disabled="view === 'funding' || !amount"
